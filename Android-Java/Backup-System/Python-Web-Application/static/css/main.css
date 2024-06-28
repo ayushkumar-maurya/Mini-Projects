@@ -1,0 +1,80 @@
+body {
+	margin: 0;
+}
+
+.logo {
+	width: 200px;
+	height: 200px;
+	margin: 70px auto 30px auto;
+}
+
+.logo > img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+.dir_path {
+	margin: auto;
+	padding: 10px;
+	border: 1px solid #0007;
+	border-radius: 15px;
+}
+
+.dir_path > .label {
+	color: #0007;
+	font-size: 1.2rem;
+	font-weight: bold;	
+}
+
+.dir_path > .path {
+	font-weight: bold;
+}
+
+.proceed {
+	margin: auto;
+}
+
+.proceed label {
+	margin-left: 20px;
+	font-size: 1.2rem;
+}
+
+.proceed input {
+	width: 100%;
+	font-size: 1.2rem;
+	padding: 15px;
+	border: 1px solid #188754;
+	border-radius: 25px;
+	box-sizing: border-box;
+}
+.proceed input:focus {
+	outline: none;
+}
+
+.proceed button {
+	width: 100%;
+	margin-top: 10px;
+	background-color: #188754;
+	color: #fff;
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 15px;
+	border: none;
+	border-radius: 25px;
+}
+.proceed button:hover {
+	background-color: #299865;
+}
+
+@media (min-width: 320px) {
+	.dir_path, .proceed {
+		width: 300px;
+	}
+}
+
+@media (max-width: 319px) {
+	.dir_path, .proceed {
+		width: 200px;
+	}
+}

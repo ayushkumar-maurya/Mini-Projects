@@ -1,0 +1,240 @@
+.rm-shadow:focus {
+	box-shadow: none;
+}
+
+.input-border:focus {
+	border: 1px solid #000;
+}
+
+div.header {
+	display: flex;
+	background-color: #0d6efd;
+}
+
+div.sm-header {
+	height: 50px;
+	background-color: #0d6efd;
+}
+
+div.logo {
+	height: 100%;
+	width: 50px;
+	padding: 5px 0px 5px 5px;
+}
+
+img.logo {
+	height: 100%;
+	width: 100%;
+}
+
+div.menu-dropdown {
+	height: 30px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+button.menu-dropdown {
+	height: 100%;
+	width: 30px;
+	background-color: #0d6efd;
+	border: none;
+	color: #fff;
+}
+button.menu-dropdown:hover {
+	background-color: #0c5dec;
+}
+
+svg.menu-dropdown {
+	margin-top: -2px;
+	margin-left: -3px;
+}
+
+a.site-name {
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+div.search-l {
+	width: calc(100% - 50px - 150px - 162px);
+}
+div.search-s {
+	width: calc(100% - 50px - 150px - 90px);
+}
+
+div.sm-search {
+	width: 100%;
+}
+
+input.search {
+	display: inline-block;
+	width: calc(100% - 50px);
+	margin: 7px 0px 0px 5px;
+	border: none;
+}
+
+button.search {
+	width: 35px;
+	padding-top: 0px;
+	padding-left: 8px;
+}
+button.search:hover {
+	background-color: #e6e6e6;
+}
+
+button.login, button.signout {
+	height: 100%;
+	color: #fff;
+	font-weight: 600;
+}
+button.login:hover, button.signout:hover {
+	color: #fff;
+	background-color: #0c5dec;
+}
+
+@media (min-width: 768px) {
+	div.header {
+		height: 50px;
+	}
+	div.sm-header {
+		display: none;
+	}
+	div.menu-dropdown {
+		display: none;
+	}
+	div.site-name {
+		padding-top: 8px;
+		width: 150px;
+	}
+	a.site-name {
+		font-size: 1.3rem;
+	}
+	button.search {
+		margin-top: -4px
+	}
+	div.user-l {
+		width: 162px;
+	}
+	div.user-s {
+		width: 90px;
+	}
+	div.menu {
+		display: flex;
+	}
+}
+
+@media (max-width: 767px) {
+	div.header {
+		height: 40px;
+	}
+	div.logo {
+		display: none;
+	}
+	div.site-name {
+		padding-top: 5px;
+		width: 145px;
+	}
+	a.site-name {
+		font-size: 1.2rem;
+	}
+	div.search-l, div.search-s {
+		display: none;
+	}
+	button.search {
+		margin-top: -2px;
+	}
+	div.user-l {
+		width: 60px;
+		margin-left: calc(100% - 40px - 145px - 50px);
+	}
+	div.user-s {
+		width: 80px;
+		margin-left: calc(100% - 40px - 145px - 70px);
+	}
+	button.login {
+		width: 50px;
+		padding: 0px 0px 2px 0px;
+	}
+	button.signout {
+		width: 70px;
+		padding: 0px 0px 2px 0px;
+	}
+	button.reg {
+		display: none;
+	}
+	div.menu {
+		display: none;
+	}
+}
+
+div.menu {
+	height: 36px;
+	background-color: #3c78ff;
+	padding-left: 10px;
+}
+
+div.opts {
+	width: 255px;
+}
+
+button.opt {
+	border: none;
+	height: 30px;
+	background-color: #3c78ff;
+	color: #fff;
+	margin-top: 3px;
+	font-weight: 500;
+}
+button.opt:hover {
+	border: 1px solid #fff;
+	background-color: #0d6efd;
+}
+
+div.name-s {
+	width: 250px;
+	margin-left: calc(100% - 255px - 250px - 10px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: right;
+	padding-top: 5px;
+	color: #fff;
+	font-weight: 500;
+}
+
+div.modal-menu {
+	width: 75%;
+}
+
+div.reg {
+	padding: 10px 0px 10px 15px;
+}
+
+button.option {
+	width: 100%;
+	border: none;
+	text-align: left;
+	background-color: #fff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+button.option:hover {
+	background-color: #f0f0f0;
+}
+
+div.footer {
+	background-color: #f0f0f0;
+	padding: 20px;
+	text-align: center;
+}
+
+a.footer {
+	text-decoration: none;
+	color: #000;
+	font-weight: 500;
+}
+a.footer:hover {
+	font-size: 1.03rem;
+}

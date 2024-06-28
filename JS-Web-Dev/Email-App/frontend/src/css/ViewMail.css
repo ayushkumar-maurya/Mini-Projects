@@ -1,0 +1,35 @@
+.view-mail {
+	padding: 15px;
+	height: calc(100% - 30px);
+	overflow-y: scroll;
+}
+
+.view-mail > .subject {
+	font-family: 'Noto Serif', serif;
+	margin: 0 0 15px 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.view-mail > .from, .view-mail > .to {
+	font-family: 'Noto Serif', serif;
+	font-size: 0.9rem;
+	margin: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.view-mail span {
+	font-weight: bold;
+}
+
+.view-mail > hr {
+	margin: 10px 0;
+}
+
+.view-mail > .msg {
+	font-family: 'Noto Serif', serif;
+	margin: 0;
+}

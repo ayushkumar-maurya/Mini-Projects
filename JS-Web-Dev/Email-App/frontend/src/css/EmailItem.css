@@ -1,0 +1,33 @@
+.email-item {
+	display: flex;
+	font-size: 1rem;
+	font-family: 'Noto Serif', serif;
+	border-radius: 5px;
+	box-sizing: border-box;
+	border-left: 1px solid #0008;
+	border-right: 1px solid #0008;
+	border-bottom: 1px solid #0008;
+	box-shadow: 0px 0px 5px #0008;
+	margin: 0px 5px;
+	width: calc(100% - 10px);
+}
+
+.email-item:hover {
+	background-color: #efefef;
+	box-shadow: 0px 5px 7px #0008;
+}
+
+.email-item > .add, .email-item > .subject {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 8px;
+}
+
+.email-item > .add {
+	width: 25%;
+}
+
+.email-item > .subject {
+	width: 75%;
+}

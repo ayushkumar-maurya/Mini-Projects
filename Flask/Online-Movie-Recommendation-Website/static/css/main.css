@@ -1,0 +1,42 @@
+div.bg {
+	background-image: url("/static/bg.jpg");
+	background-size: cover;
+	background-position: center;
+	opacity: .5;
+	width: 100%;
+	height: 700px;
+}
+
+div.outerDiv {
+	position: absolute;
+	top: 100px;
+	width: 100%;
+	height: fit-content;
+}
+
+div.innerDiv {
+	margin: auto;
+	margin-top: 70px;
+	width: fit-content;
+	text-align: center;
+}
+
+p.msg {
+	font-size: 1.7rem;
+	font-weight: 900;
+	color: #1e003c;	
+}
+
+button.srch {
+	background-color: #000;
+	color: #fff;
+	font-size: 1.3rem;
+	font-weight: 500;
+}
+button.srch:hover {
+	background-color: #0f0f0f;
+	color: #fff;
+}
+button.srch:focus {
+	box-shadow: none;
+}

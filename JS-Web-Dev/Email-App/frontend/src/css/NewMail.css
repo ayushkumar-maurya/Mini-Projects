@@ -1,0 +1,61 @@
+.new-mail {
+	padding: 15px;
+}
+
+.new-mail > .error-container {
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+}
+
+.new-mail .error {
+	width: fit-content;
+	margin: 30px auto 0 auto;
+	background-color: #f8d7da;
+	border: 1px solid #f003;
+	border-radius: 5px;
+	padding: 10px;
+	color: #842029;
+	font-family: 'Noto Serif', serif;
+	font-size: 0.9rem;
+}
+
+.new-mail input, .new-mail textarea {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5px;
+	font-family: 'Noto Serif', serif;
+	font-size: 1rem;
+	border: 1px solid #000;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.new-mail input:focus, .new-mail textarea:focus {
+	outline: none;
+	border: 2px solid #000;
+}
+
+.new-mail textarea {
+	height: calc(100vh - 230px);
+	resize: none;
+}
+
+.new-mail .send {
+	font-size: 1rem;
+	font-family: 'Noto Serif', serif;
+	font-weight: bold;
+	margin-top: 5px;
+	background-color: #198754;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding: 8px 20px;
+}
+
+.new-mail .send:hover {
+	background-color: #087643;
+}

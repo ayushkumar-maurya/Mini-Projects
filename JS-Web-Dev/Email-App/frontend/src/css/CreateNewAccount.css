@@ -1,0 +1,76 @@
+@media (max-width: 620px) {
+	.create-ac-container {
+		width: calc(100% - 70px);
+	}
+}
+
+@media (min-width: 621px) {
+	.create-ac-container {
+		width: 550px;
+	}
+}
+
+.create-ac-container {
+	margin: 30px auto 30px auto;
+	border-radius: 15px;
+	border: 1px solid #0008;
+	box-shadow: 5px 5px 10px #0008;
+	padding: 15px;
+	text-align: center;
+	font-family: 'Noto Serif', serif;
+}
+
+.create-ac-container > h2 {
+	margin: 0 0 10px 0;
+}
+
+.create-ac-container > .error {
+	display: none;
+	text-align: left;
+	background-color: #f8d7da;
+	border: 1px solid #f003;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px 0;
+	color: #842029;
+}
+
+.create-ac-container .form {
+	text-align: left;
+}
+
+.create-ac-container label {
+	font-size: 0.9rem;
+}
+
+.create-ac-container input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5px;
+	font-family: 'Noto Serif', serif;
+	font-size: 1rem;
+	border: 1px solid #000;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.create-ac-container input:focus {
+	outline: none;
+	border: 2px solid #000;
+}
+
+.create-ac-container .create-ac-btn {
+	font-size: 1rem;
+	font-family: 'Noto Serif', serif;
+	font-weight: bold;
+	background-color: #198754;
+	color: #fff;
+	border: none;
+	border-radius: 10px;
+	padding: 8px 20px;
+	margin-top: 10px;
+}
+
+.create-ac-container .create-ac-btn:hover {
+	background-color: #087643;
+}

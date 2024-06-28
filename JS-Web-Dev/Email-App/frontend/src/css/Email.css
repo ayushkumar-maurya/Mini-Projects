@@ -1,0 +1,16 @@
+.email-container {
+	display: flex;
+	height: calc(100vh - 50px);
+}
+
+@media (max-width: 576px) {
+	.email-container .email {
+		width: 100%;
+	}
+}
+
+@media (min-width: 577px) {
+	.email-container .email {
+		width: calc(100% - 250px);
+	}
+}
