@@ -6,14 +6,42 @@ import {
   Image,
   TextInput,
   KeyboardAvoidingView,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 import { useHeaderHeight } from '@react-navigation/elements';
 import getColour from '../utils/Colours';
+import { API_URL } from '../utils/Base';
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+
+  const sendLoginRequest = async () => {
+    if(email.length === 0 || password.length === 0) {
+      Alert.alert('Error', 'Please fill all the Fields.', [
+        { text: 'OK' },
+      ])
+    }
+    else {
+      let url = API_URL + 'verifyuser';
+      let params = { 
+        method: 'post',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 'email': email, 'password': password })
+      };
+
+      let response = await fetch(url, params)
+      let data = await response.json()
+      if(data && data.hasOwnProperty('isUserVerified') && data.isUserVerified)
+        navigation.navigate('Dashboard');
+      else {
+        Alert.alert('Error', 'Incorrect Email or Password. Please try again.', [
+          { text: 'OK' },
+        ])
+      }
+    }
+  }
 
   return (
     <KeyboardAvoidingView
@@ -44,7 +72,7 @@ export default function Login() {
         />
 
         <TouchableOpacity
-          onPress={() => console.log("Login Button clicked")}
+          onPress={sendLoginRequest}
           style={styles.loginButton}
         >
           <Text style={styles.loginButtonText}>Login</Text>

@@ -18,6 +18,11 @@ Database related Scripts are present under folder `Database`.
 ### API Setup
 - Navigate to folder `API\money_tracker_api`.
 
+- To install all the required packages:
+	```
+	npm i
+	```
+
 - Create `.env` file and mention following credentials:
 	```
 	PORT=
@@ -25,11 +30,6 @@ Database related Scripts are present under folder `Database`.
 	DB_USERNAME=
 	DB_PASSWORD=
 	DB_NAME=
-	```
-
-- To install all the required packages:
-	```
-	npm i
 	```
 
 - To start API Server:
@@ -44,6 +44,11 @@ Database related Scripts are present under folder `Database`.
 - To install all the required packages:
 	```
 	npm i
+	```
+
+- Create `Base.js` file under path `src\utils` and mention following credentials:
+	```
+	export const API_URL = '';
 	```
 
 - To start the development server:
