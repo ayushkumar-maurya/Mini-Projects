@@ -1,15 +1,18 @@
 const mysql = require('mysql');
+const apiLog = require('../utils/apiLog');
 
-const conn = mysql.createConnection({
+const dbConn = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 });
 
-conn.connect(err => {
-	if (err) throw err;
-	else console.log('Database connected successfully.');
+dbConn.connect(err => {
+	if(err)
+    apiLog('Error', __filename, 'Database connection unsuccessful.', err);
+	else
+    apiLog('Info', null, 'Database connected successfully.');
 });
 
-module.exports = conn;
+module.exports = dbConn;

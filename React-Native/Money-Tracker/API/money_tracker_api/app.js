@@ -1,15 +1,17 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const path = require('path');
+const routes = require('./routes');
+dotenv.config()
+const dbConn = require('./db/conn');
+const apiLog = require('./utils/apiLog');
 
 const app = express();
-dotenv.config()
 
 app.use(express.json());
 
-app.use('/', require(path.join(__dirname, './routes.js')));
+app.use('/', routes(dbConn));
 
 const PORT = process.env.PORT
-app.listen(PORT, function(req, res) {
-  console.log('API Server is up and running!');
+app.listen(PORT, () => {
+  apiLog('Info', null, 'API Server is up and running!');
 });
