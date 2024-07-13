@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Text,
   ScrollView,
@@ -17,6 +17,11 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [disableLoginBtn, setDisableLoginBtn] = useState(false);
+
+  useEffect(() => {
+    if(email && email !== email.trim())
+      setEmail(email.trim());
+  }, [email]);
 
   const sendLoginRequest = async () => {
 
@@ -49,8 +54,7 @@ export default function Login({ navigation }) {
   }
 
   const checkEnteredValues = () => {
-    if(email) {
-      setEmail(email.trim());
+    if(email && password) {
       if(email.length > 0 && password.length > 0)
         return true;
     }
