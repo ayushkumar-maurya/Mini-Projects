@@ -16,14 +16,11 @@ import { API_URL } from '../utils/Base';
 export default function Login({ navigation }) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [disableLoginBtn, setDisableLoginBtn] = useState(false);
 
   const sendLoginRequest = async () => {
-    if(email.length === 0 || password.length === 0) {
-      Alert.alert('Error', 'Please fill all the Fields.', [
-        { text: 'OK' },
-      ])
-    }
-    else {
+
+    if(checkEnteredValues()) {
       let url = API_URL + 'verifyuser';
       let params = { 
         method: 'post',
@@ -31,16 +28,33 @@ export default function Login({ navigation }) {
         body: JSON.stringify({ 'email': email, 'password': password })
       };
 
+      setDisableLoginBtn(true);
       let response = await fetch(url, params)
       let data = await response.json()
       if(data && data.hasOwnProperty('isUserVerified') && data.isUserVerified)
         navigation.navigate('Dashboard');
       else {
+        setDisableLoginBtn(false);
         Alert.alert('Error', 'Incorrect Email or Password. Please try again.', [
           { text: 'OK' },
         ])
       }
     }
+
+    else {
+      Alert.alert('Error', 'Please fill all the Fields correctly.', [
+        { text: 'OK' },
+      ])
+    }
+  }
+
+  const checkEnteredValues = () => {
+    if(email) {
+      setEmail(email.trim());
+      if(email.length > 0 && password.length > 0)
+        return true;
+    }
+    return false;
   }
 
   return (
@@ -74,6 +88,7 @@ export default function Login({ navigation }) {
         <TouchableOpacity
           onPress={sendLoginRequest}
           style={styles.loginButton}
+          disabled={disableLoginBtn}
         >
           <Text style={styles.loginButtonText}>Login</Text>
         </TouchableOpacity>
