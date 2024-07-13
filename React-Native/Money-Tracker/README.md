@@ -39,7 +39,7 @@ Database related Scripts are present under folder `Database`.
 
 
 ### Mobile App Setup
-- Navigate to folder `MobileApp\money_tracker`.
+- Navigate to folder `Mobile-App\money_tracker`.
 
 - To install all the required packages:
 	```
