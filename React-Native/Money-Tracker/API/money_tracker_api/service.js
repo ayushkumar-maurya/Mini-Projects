@@ -21,7 +21,7 @@ const verifyUser = async (dbConn, data) => {
 			isUserVerified = await compareWithHashValue(recordsPassword[0].password, password);
 	}
 
-	return {data: encrypt(JSON.stringify({isUserVerified: isUserVerified}))}
+	return {data: encrypt(JSON.stringify({authStatus: isUserVerified}))}
 };
 
 module.exports = { home, verifyUser }

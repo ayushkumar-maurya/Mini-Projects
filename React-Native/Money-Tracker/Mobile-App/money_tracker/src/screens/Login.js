@@ -10,6 +10,7 @@ import {
   Alert
 } from 'react-native';
 import { useHeaderHeight } from '@react-navigation/elements';
+import { encrypt, decrypt } from '../utils/Encryption';
 import getColour from '../utils/Colours';
 import { API_URL } from '../utils/Base';
 
@@ -26,17 +27,27 @@ export default function Login({ navigation }) {
   const sendLoginRequest = async () => {
 
     if(checkEnteredValues()) {
+      let isUserVerified = false;
       let url = API_URL + 'verifyuser';
+      let postData = {data: encrypt(JSON.stringify({
+        email: email,
+        password: password
+      }))}
       let params = { 
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 'email': email, 'password': password })
+        body: JSON.stringify(postData)
       };
 
       setDisableLoginBtn(true);
       let response = await fetch(url, params)
-      let data = await response.json()
-      if(data && data.hasOwnProperty('isUserVerified') && data.isUserVerified)
+      let responseData = await response.json()
+      if(responseData && responseData.data) {
+        let { authStatus } = JSON.parse(decrypt(responseData.data));
+        isUserVerified = authStatus;
+      }
+
+      if(isUserVerified)
         navigation.navigate('Dashboard');
       else {
         setDisableLoginBtn(false);
