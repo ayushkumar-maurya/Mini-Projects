@@ -9,11 +9,8 @@ const getRoutes = dbConn => {
   });
 
   router.post('/verifyuser', async (req, res) => {
-    if(req.body && req.body.email && req.body.password) {
-      let email = req.body.email.trim();
-      let password = req.body.password;
-      res.json(await verifyUser(dbConn, email, password));
-    }
+    if(req.body && req.body.data)
+      res.json(await verifyUser(dbConn, req.body.data));
     else
       res.json(null);
   });

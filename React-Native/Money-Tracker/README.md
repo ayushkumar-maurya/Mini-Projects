@@ -15,6 +15,11 @@ Database related Scripts are present under folder `Database`.
 2. `tables.sql` - Create required Tables.
 
 
+### Generate Secret Key used for Encryption / Decryption purpose.
+- Navigate to folder `API`.
+- Run `node secret_key.js` to get Secret Key.
+
+
 ### API Setup
 - Navigate to folder `API\money_tracker_api`.
 
@@ -26,6 +31,7 @@ Database related Scripts are present under folder `Database`.
 - Create `.env` file and mention following credentials:
 	```
 	PORT=
+	SECRET_KEY=
 	DB_HOST=
 	DB_USERNAME=
 	DB_PASSWORD=
@@ -49,6 +55,7 @@ Database related Scripts are present under folder `Database`.
 - Create `Base.js` file under path `src\utils` and mention following credentials:
 	```
 	export const API_URL = '';
+	export const SECRET_KEY = '';
 	```
 
 - To start the development server:
