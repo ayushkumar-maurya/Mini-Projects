@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Alert
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { encrypt, decrypt } from '../utils/Encryption';
 import getColour from '../utils/Colours';
@@ -47,8 +48,20 @@ export default function Login({ navigation }) {
         isUserVerified = authStatus;
       }
 
-      if(isUserVerified)
-        navigation.navigate('Dashboard');
+      if(isUserVerified) {
+        try {
+          await AsyncStorage.setItem('UserEmail', email);
+          await AsyncStorage.setItem('UserPassword', encrypt(password));
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Dashboard' }]
+          });
+        } catch (err) {
+          Alert.alert('Warning', 'Something went wrong.', [
+            { text: 'OK' },
+          ])
+        }
+      }
       else {
         setDisableLoginBtn(false);
         Alert.alert('Error', 'Incorrect Email or Password. Please try again.', [
