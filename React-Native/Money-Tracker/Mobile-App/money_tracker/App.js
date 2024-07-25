@@ -50,16 +50,12 @@ export default function App() {
     try {
       // Fetching Email.
       AsyncStorage.getItem('UserEmail').then(value => {
-        if (value) {
-          userEmail = value;
-          // Fetching Password.
-          AsyncStorage.getItem('UserPassword').then(value => {
-            if (value) {
-              userPassword = value;
-              setScreenName((userEmail && userPassword) ? 'Dashboard' : 'Login');
-            }
-          })
-        }
+        userEmail = value;
+        // Fetching Password.
+        AsyncStorage.getItem('UserPassword').then(value => {
+          userPassword = value;
+          setScreenName((userEmail && userPassword) ? 'Dashboard' : 'Login');
+        })
       })
 
     } catch (error) {
