@@ -75,13 +75,13 @@ export default function App() {
 const styles = StyleSheet.create({
   header: {
     style: {
-      backgroundColor: getColour('primaryBg')
+      backgroundColor: getColour('colour3')
     },
-    tintColor: getColour('primaryFont')
+    tintColor: getColour('colour4')
   },
   loading: {
     flex: 1,
-    backgroundColor: getColour('bg'),
+    backgroundColor: getColour('colour1'),
     alignItems: 'center',
     justifyContent: 'center'
   }

@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     flexWrap: "wrap",
-    backgroundColor: getColour('bg')
+    backgroundColor: getColour('colour1')
   },
   option: {
-    backgroundColor: getColour('bg2'),
+    backgroundColor: getColour('colour5'),
     height: 120,
     width: 120,
     padding: 10,
@@ -61,20 +61,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     borderWidth: 1,
-    borderColor: getColour('colour2'),
+    borderColor: getColour('colour7'),
     borderRadius: 10,
     elevation: 5
   },
   optionIcon: {
     size: 60,
-    color: getColour('colour1')
+    color: getColour('colour6')
   },
   optionTitle: {
-    color: getColour('colour1'),
+    color: getColour('colour6'),
     fontSize: 18
   },
   emptyBox: {
     flexGrow: 1,
-    backgroundColor: getColour('bg')
+    backgroundColor: getColour('colour1')
   }
 });

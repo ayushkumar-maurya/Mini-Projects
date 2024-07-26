@@ -136,14 +136,14 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: getColour('bg'),
+    backgroundColor: getColour('colour1'),
     paddingTop: 5,
     paddingBottom: 25
   },
   scrollView: {
     paddingLeft: 30,
     paddingRight: 30,
-    backgroundColor: getColour('bg')
+    backgroundColor: getColour('colour1')
   },
   logo: {
     marginTop: 45,
@@ -154,36 +154,36 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   input: {
-    color: getColour('font'),
+    color: getColour('colour2'),
     padding: 10,
     fontSize: 17,
     borderWidth: 1,
-    borderColor: getColour('font'),
+    borderColor: getColour('colour2'),
     borderRadius: 10,
     marginTop: 25
   },
   loginButton: {
     alignItems: 'center',
-    backgroundColor: getColour('primaryBg'),
+    backgroundColor: getColour('colour3'),
     padding: 10,
     borderRadius: 10,
     marginTop: 25
   },
   loginButtonText: {
-    color: getColour('primaryFont'),
+    color: getColour('colour4'),
     fontSize: 17,
     fontWeight: 'bold'
   },
   createButton: {
     alignItems: 'center',
-    backgroundColor: getColour('bg2'),
+    backgroundColor: getColour('colour5'),
     padding: 10,
     borderRadius: 10,
     marginTop: 15,
     marginBottom: 5
   },
   createButtonText: {
-    color: getColour('font'),
+    color: getColour('colour2'),
     fontSize: 17,
     fontWeight: 'bold'
   }

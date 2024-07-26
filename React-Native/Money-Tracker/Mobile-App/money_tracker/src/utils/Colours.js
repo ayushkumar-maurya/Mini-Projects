@@ -1,11 +1,11 @@
 const colours = {
-  bg: '#FFF',
-  font: '#000',
-  primaryBg: '#0D6EFD',
-  primaryFont: '#FFF',
-  bg2: '#E6E6E6',
-  colour1: '#001848',
-  colour2: '#D5D5D5'
+  colour1: '#FFF',
+  colour2: '#000',
+  colour3: '#0D6EFD',
+  colour4: '#FFF',
+  colour5: '#E6E6E6',
+  colour6: '#001848',
+  colour7: '#D5D5D5'
 };
 
 export default colour => colours[colour];
