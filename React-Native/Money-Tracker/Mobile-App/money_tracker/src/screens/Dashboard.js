@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import getColour from '../utils/Colours';
 
-export default CreateNewUser = () => {
+export default Dashboard = ({ navigation }) => {
   return (
     <View style={styles.container}>
 
@@ -15,7 +15,7 @@ export default CreateNewUser = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => console.log('Button pressed')}
+        onPress={() => navigation.navigate('Statement')}
         style={styles.option}
       >
         <FontAwesome name="list" size={styles.optionIcon.size} color={styles.optionIcon.color} />

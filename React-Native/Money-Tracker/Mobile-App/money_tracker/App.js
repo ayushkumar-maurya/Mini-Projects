@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './src/screens/Login';
 import CreateNewUser from './src/screens/CreateNewUser';
 import Dashboard from './src/screens/Dashboard';
+import Statement from './src/screens/Statement';
 import getColour from './src/utils/Colours';
 
 export default function App() {
@@ -33,6 +34,13 @@ export default function App() {
           />
 
           <Stack.Screen name='Dashboard' component={ Dashboard }
+            options={{
+              headerStyle: styles.header.style,
+              headerTintColor: styles.header.tintColor
+            }}
+          />
+
+          <Stack.Screen name='Statement' component={ Statement }
             options={{
               headerStyle: styles.header.style,
               headerTintColor: styles.header.tintColor
