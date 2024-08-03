@@ -1,8 +1,24 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome } from '@expo/vector-icons';
 import getColour from '../utils/Colours';
 
 export default Dashboard = ({ navigation }) => {
+
+  const logout = async () => {
+    try {
+      await AsyncStorage.clear();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }]
+      });
+    } catch (err) {
+      Alert.alert('Warning', 'Something went wrong.', [
+        { text: 'OK' },
+      ])
+    }
+  }
+
   return (
     <View style={styles.container}>
 
@@ -31,7 +47,7 @@ export default Dashboard = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => console.log('Button pressed')}
+        onPress={logout}
         style={styles.option}
       >
         <FontAwesome name="sign-out" size={styles.optionIcon.size} color={styles.optionIcon.color} />
