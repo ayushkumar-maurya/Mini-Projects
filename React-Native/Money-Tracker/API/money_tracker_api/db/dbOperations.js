@@ -89,3 +89,28 @@ exports.dbGetSources = async dbConn => {
 
   return records;
 }
+
+exports.dbGetBalanceAmounts = async dbConn => {
+  let sql = `
+    SELECT s.name, t.total_amount
+    FROM (SELECT source_id, SUM(amount) AS total_amount
+          FROM transactions
+          GROUP BY source_id) t
+    INNER JOIN sources s
+    ON t.source_id = s.id;
+  `;
+
+  let records = await new Promise(resolve => {
+    let result = null;
+
+    dbConn.query(sql, (err, data) => {
+      if(err)
+        apiLog('Error', __filename, err);
+      else
+        result = data;
+      resolve(result);
+    })
+  });
+
+  return records;
+}

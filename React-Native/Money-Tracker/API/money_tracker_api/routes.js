@@ -1,6 +1,6 @@
 const express = require('express');
 const { encrypt, decrypt } = require('./utils/encryption');
-const { home, verifyUser, addUser, addTransaction, getSources } = require('./service');
+const { home, verifyUser, addUser, addTransaction, getSources, getBalanceAmounts } = require('./service');
 
 const getRoutes = dbConn => {
   const router = express.Router();  
@@ -23,6 +23,10 @@ const getRoutes = dbConn => {
 
   router.get('/sources', async (req, res) => {
     res.json(await getSources(dbConn));
+  });
+
+  router.post('/balanceamounts', async (req, res) => {
+    res.json(await handleEncReqRes(req, dbConn, getBalanceAmounts));
   });
 
   return router;
