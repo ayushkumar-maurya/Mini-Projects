@@ -1,7 +1,7 @@
 const apiLog = require('../utils/apiLog');
 
-exports.dbGetUserPassword = async (dbConn, email) => {
-    let sql = 'SELECT password FROM users WHERE email = ?';
+exports.dbGetUserInfo = async (dbConn, email) => {
+    let sql = 'SELECT id, password FROM users WHERE email = ?';
 
     let records = await new Promise(resolve => {
       let result = null;
@@ -54,13 +54,13 @@ exports.dbSetUserInfo = async (dbConn, email, password, name, mobileNo) => {
   return rowsAffected;
 }
 
-exports.dbSetTransaction = async (dbConn, sourceId, description, amount) => {
-  let sql = 'INSERT INTO transactions (source_id, description, amount) VALUES (?, ?, ?)';
+exports.dbSetTransaction = async (dbConn, userID, sourceId, description, amount) => {
+  let sql = 'INSERT INTO transactions (user_id, source_id, description, amount) VALUES (?, ?, ?, ?)';
 
   let rowsAffected = await new Promise(resolve => {
     let result = null;
 
-    dbConn.query(sql, [sourceId, description, amount], (err, data) => {
+    dbConn.query(sql, [userID, sourceId, description, amount], (err, data) => {
       if(err)
         apiLog('Error', __filename, err);
       else

@@ -1,5 +1,5 @@
 const {
-	dbGetUserPassword,
+	dbGetUserInfo,
 	dbGetExistingUser,
 	dbSetUserInfo,
 	dbSetTransaction,
@@ -13,19 +13,24 @@ const home = () => {
 
 const verifyUser = async (dbConn, { email, password }) => {
 	let isUserVerified = false;
+	let userId = null;
 
 	if(email && password) {
 		email = email.trim();
 
 		// Fetching Password of User.
-		let passwordRecord = await dbGetUserPassword(dbConn, email);
+		let userRecord = await dbGetUserInfo(dbConn, email);
 
 		// Verifying Password.
-		if(passwordRecord && passwordRecord.length > 0)
-			isUserVerified = await compareWithHashValue(passwordRecord[0].password, password);
+		if(userRecord && userRecord.length > 0)
+			isUserVerified = await compareWithHashValue(userRecord[0].password, password);
+
+		// Fetching User Id.
+		if(isUserVerified)
+			userId = userRecord[0].id;
 	}
 
-	return {authStatus: isUserVerified}
+	return {authStatus: isUserVerified, userId: userId}
 };
 
 const addUser = async (dbConn, { email, password, name, mobileNo }) => {
@@ -55,12 +60,12 @@ const addTransaction = async (dbConn, { email, password, sourceId, description, 
 
 	if(email && password) {
 		// Authenticating User.
-		let { authStatus } = await verifyUser(dbConn, {email, password});
+		let { authStatus, userId } = await verifyUser(dbConn, {email, password});
 		if(authStatus) {
-			if(sourceId && amount && /^(-?[0-9]+)(\.[0-9]+)?$/.test(amount)) {
+			if(userId && sourceId && amount && /^(-?[0-9]+)(\.[0-9]+)?$/.test(amount)) {
 				if(description)
 					description = description.trim();
-				transactionAdded = await dbSetTransaction(dbConn, sourceId, description, amount) === 1
+				transactionAdded = await dbSetTransaction(dbConn, userId, sourceId, description, amount) === 1
 			}
 		}
 	}

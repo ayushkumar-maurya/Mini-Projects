@@ -25,3 +25,12 @@ CREATE TABLE transactions (
 	CONSTRAINT transactions_pk PRIMARY KEY (id),
 	CONSTRAINT transactions_fk FOREIGN KEY (source_id) REFERENCES sources(id)
 );
+
+-- Adding Column User ID along with its Foreign Key dependency into Transactions Table.
+ALTER TABLE transactions
+ADD COLUMN user_id INT NOT NULL;
+
+ALTER TABLE transactions
+ADD CONSTRAINT transactions_fk2
+FOREIGN KEY (user_id)
+REFERENCES users(id);
