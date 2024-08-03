@@ -71,3 +71,21 @@ exports.dbSetTransaction = async (dbConn, sourceId, description, amount) => {
 
   return rowsAffected;
 }
+
+exports.dbGetSources = async dbConn => {
+  let sql = 'SELECT id, name FROM sources';
+
+  let records = await new Promise(resolve => {
+    let result = null;
+
+    dbConn.query(sql, (err, data) => {
+      if(err)
+        apiLog('Error', __filename, err);
+      else
+        result = data;
+      resolve(result);
+    })
+  });
+
+  return records;
+}

@@ -2,7 +2,8 @@ const {
 	dbGetUserPassword,
 	dbGetExistingUser,
 	dbSetUserInfo,
-	dbSetTransaction
+	dbSetTransaction,
+	dbGetSources
 } = require('./db/dbOperations');
 const { compareWithHashValue, getHashValue } = require('./utils/hash');
 
@@ -67,4 +68,8 @@ const addTransaction = async (dbConn, { email, password, sourceId, description, 
 	return {transactionAdded: transactionAdded}
 };
 
-module.exports = { home, verifyUser, addUser, addTransaction }
+const getSources = async dbConn => {
+	return {sources: await dbGetSources(dbConn)}
+};
+
+module.exports = { home, verifyUser, addUser, addTransaction, getSources }
