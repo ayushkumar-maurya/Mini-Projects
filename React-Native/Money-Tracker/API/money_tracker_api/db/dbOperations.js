@@ -18,6 +18,24 @@ exports.dbGetUserPassword = async (dbConn, email) => {
     return records;
 }
 
+exports.dbGetExistingUser = async (dbConn, email, mobileNo) => {
+  let sql = 'SELECT email FROM users WHERE email = ? OR mobile_no = ?';
+
+  let records = await new Promise(resolve => {
+    let result = null;
+
+    dbConn.query(sql, [email, mobileNo], (err, data) => {
+      if(err)
+        apiLog('Error', __filename, err);
+      else
+        result = data;
+      resolve(result);
+    })
+  });
+
+  return records;
+}
+
 exports.dbSetUserInfo = async (dbConn, email, password, name, mobileNo) => {
   let sql = 'INSERT INTO users (email, password, name, mobile_no) VALUES (?, ?, ?, ?)';
 
