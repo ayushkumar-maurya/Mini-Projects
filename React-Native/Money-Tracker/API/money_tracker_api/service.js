@@ -1,4 +1,9 @@
-const { dbGetUserPassword, dbGetExistingUser, dbSetUserInfo } = require('./db/dbOperations');
+const {
+	dbGetUserPassword,
+	dbGetExistingUser,
+	dbSetUserInfo,
+	dbSetTransaction
+} = require('./db/dbOperations');
 const { compareWithHashValue, getHashValue } = require('./utils/hash');
 
 const home = () => {
@@ -30,8 +35,10 @@ const addUser = async (dbConn, { email, password, name, mobileNo }) => {
 		name = name.trim();
 		mobileNo = mobileNo.trim();
 
+		// Verifying whether User with the mentioned email or mobile no. doesn't exist.
 		let existingUser = await dbGetExistingUser(dbConn, email, mobileNo);
 		if(existingUser && existingUser.length === 0) {
+			// Adding new User record.
 			if(await dbSetUserInfo(dbConn, email, await getHashValue(password), name, mobileNo) === 1)
 				createStatus = 'yes';
 		}
@@ -42,4 +49,22 @@ const addUser = async (dbConn, { email, password, name, mobileNo }) => {
 	return {createStatus: createStatus}
 };
 
-module.exports = { home, verifyUser, addUser }
+const addTransaction = async (dbConn, { email, password, sourceId, description, amount }) => {
+	transactionAdded = false;
+
+	if(email && password) {
+		// Authenticating User.
+		let { authStatus } = await verifyUser(dbConn, {email, password});
+		if(authStatus) {
+			if(sourceId && description && amount) {
+				// Validating Amount
+				if(/^([0-9]+)(\.[0-9]+)?$/.test(amount))
+					transactionAdded = await dbSetTransaction(dbConn, sourceId, description.trim(), amount) === 1
+			}
+		}
+	}
+
+	return {transactionAdded: transactionAdded}
+};
+
+module.exports = { home, verifyUser, addUser, addTransaction }

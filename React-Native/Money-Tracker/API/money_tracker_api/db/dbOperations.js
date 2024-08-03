@@ -53,3 +53,21 @@ exports.dbSetUserInfo = async (dbConn, email, password, name, mobileNo) => {
 
   return rowsAffected;
 }
+
+exports.dbSetTransaction = async (dbConn, sourceId, description, amount) => {
+  let sql = 'INSERT INTO transactions (source_id, description, amount) VALUES (?, ?, ?)';
+
+  let rowsAffected = await new Promise(resolve => {
+    let result = null;
+
+    dbConn.query(sql, [sourceId, description, amount], (err, data) => {
+      if(err)
+        apiLog('Error', __filename, err);
+      else
+        result = data;
+      resolve(result.affectedRows);
+    })
+  });
+
+  return rowsAffected;
+}
