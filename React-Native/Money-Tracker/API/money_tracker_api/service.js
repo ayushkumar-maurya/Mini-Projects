@@ -30,7 +30,8 @@ const addUser = async (dbConn, { email, password, name, mobileNo }) => {
 		name = name.trim();
 		mobileNo = mobileNo.trim();
 
-		if(await dbGetExistingUser(dbConn, email, mobileNo).length === 0) {
+		let existingUser = await dbGetExistingUser(dbConn, email, mobileNo);
+		if(existingUser && existingUser.length === 0) {
 			if(await dbSetUserInfo(dbConn, email, await getHashValue(password), name, mobileNo) === 1)
 				createStatus = 'yes';
 		}

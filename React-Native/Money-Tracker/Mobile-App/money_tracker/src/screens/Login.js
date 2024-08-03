@@ -122,7 +122,7 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => console.log("Create Button clicked")}
+          onPress={() => navigation.navigate('Create New User')}
           style={styles.createButton}
         >
           <Text style={styles.createButtonText}>Create New User</Text>
