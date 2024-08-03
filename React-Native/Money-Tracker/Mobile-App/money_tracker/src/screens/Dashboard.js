@@ -23,7 +23,7 @@ export default Dashboard = ({ navigation }) => {
     <View style={styles.container}>
 
       <TouchableOpacity
-        onPress={() => console.log('Button pressed')}
+        onPress={() => navigation.navigate('Add Transaction')}
         style={styles.option}
       >
         <FontAwesome name="plus-square" size={styles.optionIcon.size} color={styles.optionIcon.color} />
