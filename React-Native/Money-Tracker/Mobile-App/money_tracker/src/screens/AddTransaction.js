@@ -21,6 +21,7 @@ export default function AddTransaction() {
   const [fetchedSources, setFetchedSources] = useState([]);
   const [description, setDescription] = useState(null);
   const [amount, setAmount] = useState(null);
+  const [type, setType] = useState('D');
   const [sourceId, setSourceId] = useState(null);
   const [disableAddBtn, setDisableAddBtn] = useState(false);
 
@@ -48,7 +49,7 @@ export default function AddTransaction() {
         password: password,
         sourceId: sourceId,
         description: description,
-        amount: amount
+        amount: type === 'D' ? ('-' + amount) : amount
       }))}
       let params = { 
         method: 'post',
@@ -100,6 +101,22 @@ export default function AddTransaction() {
           value={amount}
           placeholder="Amount"
         />
+
+        <View
+          style={Platform.OS === 'ios' ? styles.dropdownContainer.ios : styles.dropdownContainer.android}
+        >
+          <Picker
+            selectedValue={type}
+            mode="dropdown"
+            onValueChange={itemValue => setType(itemValue)}
+            style={Platform.OS === 'ios' ? styles.dropdown.ios : styles.dropdown.android}
+          >
+
+            <Picker.Item label='Debit' value='D' />
+            <Picker.Item label='Credit' value='C' />
+
+          </Picker>
+        </View>
 
         <View
           style={Platform.OS === 'ios' ? styles.dropdownContainer.ios : styles.dropdownContainer.android}

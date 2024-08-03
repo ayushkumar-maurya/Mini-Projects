@@ -57,7 +57,7 @@ const addTransaction = async (dbConn, { email, password, sourceId, description, 
 		// Authenticating User.
 		let { authStatus } = await verifyUser(dbConn, {email, password});
 		if(authStatus) {
-			if(sourceId && amount && /^([0-9]+)(\.[0-9]+)?$/.test(amount)) {
+			if(sourceId && amount && /^(-?[0-9]+)(\.[0-9]+)?$/.test(amount)) {
 				if(description)
 					description = description.trim();
 				transactionAdded = await dbSetTransaction(dbConn, sourceId, description, amount) === 1
