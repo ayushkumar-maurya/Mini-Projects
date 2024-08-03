@@ -8,6 +8,7 @@ import CreateNewUser from './src/screens/CreateNewUser';
 import Dashboard from './src/screens/Dashboard';
 import AddTransaction from './src/screens/AddTransaction';
 import Statement from './src/screens/Statement';
+import BalanceAmounts from './src/screens/BalanceAmounts';
 import getColour from './src/utils/Colours';
 
 export default function App() {
@@ -49,6 +50,13 @@ export default function App() {
           />
 
           <Stack.Screen name='Statement' component={ Statement }
+            options={{
+              headerStyle: styles.header.style,
+              headerTintColor: styles.header.tintColor
+            }}
+          />
+
+          <Stack.Screen name='Balance Amounts' component={ BalanceAmounts }
             options={{
               headerStyle: styles.header.style,
               headerTintColor: styles.header.tintColor

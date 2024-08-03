@@ -39,11 +39,11 @@ export default Dashboard = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => console.log('Button pressed')}
+        onPress={() => navigation.navigate('Balance Amounts')}
         style={styles.option}
       >
         <FontAwesome name="rupee" size={styles.optionIcon.size} color={styles.optionIcon.color} />
-        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.optionTitle}>Balance Amount</Text>
+        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.optionTitle}>Balance Amounts</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
