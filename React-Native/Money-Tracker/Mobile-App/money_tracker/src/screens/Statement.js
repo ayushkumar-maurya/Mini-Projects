@@ -1,47 +1,84 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, StyleSheet, Platform, ScrollView } from 'react-native';
 import {Picker} from "@react-native-picker/picker"; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import StatementRowItem from '../components/StatementRowItem';
+import { encrypt, decrypt } from '../utils/Encryption';
 import getColour from '../utils/Colours';
+import { API_URL } from '../utils/Base';
 
 export default Statement = () => {
-  const [source , setSource]  = useState('Select Source');
+  const [sourceId , setSourceId]  = useState('-1');
+  const [fetchedSources, setFetchedSources] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   
+  useEffect(() => {
+    // Fetching Sources.
+    (async () => {
+      let url = API_URL + 'sources';
+      let response = await fetch(url)
+      let { sources } = await response.json()
+        setFetchedSources(sources);
+    })();
+	}, []);
+
+  useEffect(() => {
+    // Fetching Statement.
+    if(sourceId != -1) {
+      (async () => {
+        let email = await AsyncStorage.getItem('UserEmail');
+        let password = decrypt(await AsyncStorage.getItem('UserPassword'));
+
+        let url = API_URL + 'statement';
+        let postData = {data: encrypt(JSON.stringify({
+          email: email,
+          password: password,
+          sourceId: sourceId
+        }))}
+        let params = { 
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(postData)
+        };
+
+        let response = await fetch(url, params)
+        let responseData = await response.json()
+        if(responseData && responseData.data) {
+          let { statement } = JSON.parse(decrypt(responseData.data));
+          if(statement)
+            setTransactions(statement);
+        }
+      })();
+    }
+	}, [sourceId]);
+
+  let transactionKey = 0;
+
   return (
     <View style={styles.container}>
       <View
         style={Platform.OS === 'ios' ? styles.dropdownContainer.ios : null}
       >
         <Picker
-          selectedValue={source}
+          selectedValue={sourceId}
           mode="dropdown"
-          onValueChange={itemValue => setSource(itemValue)}
+          onValueChange={itemValue => setSourceId(itemValue)}
           style={Platform.OS === 'ios' ? styles.dropdown.ios : styles.dropdown.android}
         >
 
           <Picker.Item label='Select Source' value='-1' />
-          <Picker.Item label='Abc' value='0' />
-          <Picker.Item label='Pqrs' value='1' />
-          <Picker.Item label='Xyz' value='2' />
+          {fetchedSources.map(source => {
+            return <Picker.Item key={source.id} label={source.name} value={source.id} />
+          })}
 
         </Picker>
       </View>
 
       <ScrollView style={styles.statement}>
 
-        <StatementRowItem transactionInfo={{
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-          date: '04 May 2024 14:23',
-          source: 'Abcde',
-          amount: 4587.47
-          }} />
-
-        <StatementRowItem transactionInfo={{
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-          date: '12 Aug 2024 18:23',
-          source: 'Pqrstuv',
-          amount: -889.00
-          }} />
+        {transactions.map(transaction => {
+          return <StatementRowItem key={++transactionKey} transactionInfo={transaction} />
+        })}
 
       </ScrollView>
 

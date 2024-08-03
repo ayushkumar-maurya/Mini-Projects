@@ -2,14 +2,14 @@ import { Text, View, StyleSheet } from 'react-native';
 import getColour from '../utils/Colours';
 
 export default StatementRowItem = props => {
-  const {description, date, source, amount} = props.transactionInfo
+  const {description, datetime, source, amount} = props.transactionInfo
 
   return (
     <View style={styles.container}>
 
       <View style={styles.descContainer}>
         <Text style={styles.desc}>{description}</Text>
-        <Text style={styles.info}>{date}</Text>
+        <Text style={styles.info}>{datetime}</Text>
         <Text style={styles.info}>{source}</Text>
       </View>
 
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   },
   amt: {
     textAlign: 'right',
+    fontSize: 15,
     fontWeight: '500'
   },
   credit: {
