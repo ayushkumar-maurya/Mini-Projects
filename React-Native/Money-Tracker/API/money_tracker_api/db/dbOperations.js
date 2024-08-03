@@ -17,3 +17,21 @@ exports.dbGetUserPassword = async (dbConn, email) => {
 
     return records;
 }
+
+exports.dbSetUserInfo = async (dbConn, email, password, name, mobileNo) => {
+  let sql = 'INSERT INTO users (email, password, name, mobile_no) VALUES (?, ?, ?, ?)';
+
+  let rowsAffected = await new Promise(resolve => {
+    let result = null;
+
+    dbConn.query(sql, [email, password, name, mobileNo], (err, data) => {
+      if(err)
+        apiLog('Error', __filename, err);
+      else
+        result = data;
+      resolve(result.affectedRows);
+    })
+  });
+
+  return rowsAffected;
+}

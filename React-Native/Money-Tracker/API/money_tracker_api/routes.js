@@ -1,5 +1,5 @@
 const express = require('express');
-const { home, verifyUser } = require('./service');
+const { home, verifyUser, addUser } = require('./service');
 
 const getRoutes = dbConn => {
   const router = express.Router();  
@@ -11,6 +11,13 @@ const getRoutes = dbConn => {
   router.post('/verifyuser', async (req, res) => {
     if(req.body && req.body.data)
       res.json(await verifyUser(dbConn, req.body.data));
+    else
+      res.json(null);
+  });
+
+  router.post('/adduser', async (req, res) => {
+    if(req.body && req.body.data)
+      res.json(await addUser(dbConn, req.body.data));
     else
       res.json(null);
   });
