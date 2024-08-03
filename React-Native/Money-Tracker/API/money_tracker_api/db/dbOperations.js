@@ -90,11 +90,43 @@ exports.dbGetSources = async dbConn => {
   return records;
 }
 
-exports.dbGetBalanceAmounts = async dbConn => {
+exports.dbGetStatement = async (dbConn, userId, sourceId) => {
+  let sql = `
+    SELECT
+      t.description,
+      DATE_FORMAT(t.datetime, '%d %b %Y %H:%i') AS datetime,
+      s.name AS source,
+      t.amount
+    FROM (SELECT *
+          FROM transactions
+          WHERE user_id = ?
+          AND source_id = ?) t
+    INNER JOIN sources s
+    ON t.source_id = s.id
+    ORDER BY t.datetime;
+  `;
+
+  let records = await new Promise(resolve => {
+    let result = null;
+
+    dbConn.query(sql, [userId, sourceId], (err, data) => {
+      if(err)
+        apiLog('Error', __filename, err);
+      else
+        result = data;
+      resolve(result);
+    })
+  });
+
+  return records;
+}
+
+exports.dbGetBalanceAmounts = async (dbConn, userId) => {
   let sql = `
     SELECT s.name, t.total_amount
     FROM (SELECT source_id, SUM(amount) AS total_amount
           FROM transactions
+          WHERE user_id = ?
           GROUP BY source_id) t
     INNER JOIN sources s
     ON t.source_id = s.id;
@@ -103,7 +135,7 @@ exports.dbGetBalanceAmounts = async dbConn => {
   let records = await new Promise(resolve => {
     let result = null;
 
-    dbConn.query(sql, (err, data) => {
+    dbConn.query(sql, [userId], (err, data) => {
       if(err)
         apiLog('Error', __filename, err);
       else

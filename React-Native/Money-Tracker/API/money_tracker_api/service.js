@@ -4,6 +4,7 @@ const {
 	dbSetUserInfo,
 	dbSetTransaction,
 	dbGetSources,
+	dbGetStatement,
 	dbGetBalanceAmounts
 } = require('./db/dbOperations');
 const { compareWithHashValue, getHashValue } = require('./utils/hash');
@@ -78,6 +79,19 @@ const getSources = async dbConn => {
 	return {sources: await dbGetSources(dbConn)}
 };
 
+const getStatement = async (dbConn, { email, password, sourceId }) => {
+	let statement = null;
+
+	if(email && password) {
+		// Authenticating User.
+		let { authStatus, userId } = await verifyUser(dbConn, {email, password});
+		if(authStatus && userId && sourceId)
+			statement = await dbGetStatement(dbConn, userId, sourceId);
+	}
+
+	return {statement: statement}
+};
+
 const getBalanceAmounts = async (dbConn, { email, password }) => {
 	let balanceAmounts = null;
 
@@ -85,10 +99,10 @@ const getBalanceAmounts = async (dbConn, { email, password }) => {
 		// Authenticating User.
 		let { authStatus, userId } = await verifyUser(dbConn, {email, password});
 		if(authStatus && userId)
-			balanceAmounts = await dbGetBalanceAmounts(dbConn);
+			balanceAmounts = await dbGetBalanceAmounts(dbConn, userId);
 	}
 
 	return {balanceAmounts: balanceAmounts}
 };
 
-module.exports = { home, verifyUser, addUser, addTransaction, getSources, getBalanceAmounts }
+module.exports = { home, verifyUser, addUser, addTransaction, getSources, getStatement, getBalanceAmounts }
